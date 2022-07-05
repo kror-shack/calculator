@@ -3,6 +3,7 @@ const displayCalculation = document.getElementById('display-calculation');
 const equalTo = document.getElementById('equal-to');
 const displayResult = document.getElementById('display-result');
 let operatorButtons = document.getElementsByClassName("operators");
+let decimalButton = document.getElementById("decimal");
 const clearAll = document.getElementById("ac");
 let square = document.getElementById("square");
 displayCalculation.textContent = "0"
@@ -70,7 +71,8 @@ buttons.forEach(button => button.addEventListener('click', () =>
        if(button.className == "operators"){
             array.push(button.innerText)
             displayCalculation.innerText = array.join("");
-            console.log(array)
+            console.log(array);
+            decimalButton.disabled = false;
             }
     }
 
@@ -84,6 +86,7 @@ buttons.forEach(button => button.addEventListener('click', () =>
 
 
 
+
 }))
 
 
@@ -92,20 +95,24 @@ function seperate(array){
         if(array[i] == "+" ||array[i] == "-" || array[i] == "*" || array[i] == "/" ){
         firstVarArray = array.slice(0,i);
         let numAfterIndex = i +1;
+        console.log(firstVarArray);
         secondVarArray = array.slice(numAfterIndex, array.length);
-        console.log(secondVarArray)
+        console.log(secondVarArray);
         operator = array[i];
 
     }
 }
     firstVarString = firstVarArray.join("");
-    firstVar = parseInt(firstVarString);
+    console.log(firstVarString);
+    firstVar = parseFloat(firstVarString);
+    console.log(firstVar);
     secondVarString = secondVarArray.join("");
-    secondVar = parseInt(secondVarString);
+    secondVar = parseFloat(secondVarString);
 }
 
 function equalsTo (){
     checkForErrors();
+    decimalButton.disabled = false;
     if(operatorExists == 1){
     seperate(array);
                 console.log(firstVar);
@@ -124,6 +131,7 @@ function equalsTo (){
     for(let i = 0; i < numArr.length ; i++){
         array[i] = numArr[i]
     }
+
 }
 }
 
@@ -204,8 +212,10 @@ function squareNum (){
 square.onclick = function(){
     squareNum();
 }
+  
+decimalButton.onclick = function(){
+    decimalButton.disabled = true;
 
-
-
+}
 
 
